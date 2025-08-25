@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
-public class Student {
+public class Professor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,8 +17,7 @@ public class Student {
 
     private String name;
 
-    @ManyToOne
-    private Professor professor;
-
+    @OneToMany(mappedBy = "professor")
+    private Set<Student> students;
 
 }
