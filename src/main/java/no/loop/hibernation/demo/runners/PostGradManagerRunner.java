@@ -59,7 +59,6 @@ public class PostGradManagerRunner implements CommandLineRunner {
         professorRepository.save(newProf);
 
 
-
         pulledStudent.setProfesssor(newProf);
         anotherNewStudent.setProfesssor(newProf);
         studentRepository.save(pulledStudent);
@@ -80,6 +79,6 @@ public class PostGradManagerRunner implements CommandLineRunner {
 //        } catch (IllegalArgumentException e) {
 //            System.out.println("not found");
 //        }
-System.out.println(pulledProfessor.getStudents().toString());
+        System.out.println(pulledProfessor.getStudents().toString());
     }
 }

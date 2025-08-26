@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StudentRepository extends JpaRepository<Student,Integer> {
 
-    // find
-    // custom DB logic
-    // findBy profis
+    // find students without a professor
+    // filter students by professor id
+    // find by name containing
 
 }
