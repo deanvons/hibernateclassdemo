@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-public class Professsor {
+public class Professor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,7 +17,7 @@ public class Professsor {
 
     private String name;
 
-    @OneToMany(mappedBy = "professsor", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "professor", fetch = FetchType.LAZY)
     private Set<Student> students;
 
 

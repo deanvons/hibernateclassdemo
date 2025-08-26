@@ -1,10 +1,10 @@
 package no.loop.hibernation.demo.runners;
 
-import no.loop.hibernation.demo.Models.Professsor;
+import jakarta.transaction.Transactional;
+import no.loop.hibernation.demo.Models.Professor;
 import no.loop.hibernation.demo.Models.Student;
 import no.loop.hibernation.demo.Repositories.ProfessorRepository;
 import no.loop.hibernation.demo.Repositories.StudentRepository;
-import org.hibernate.annotations.NotFound;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ public class PostGradManagerRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("running");
+        System.out.println("-------------------RUNNING---------------------");
         // need to interact with the data i.e. CRUD
         // register some student
         // CREATE
@@ -54,18 +54,18 @@ public class PostGradManagerRunner implements CommandLineRunner {
 
         System.out.println(pulledStudentAfterUpdate.getName() + " was found");
 
-        Professsor newProf = new Professsor();
+        Professor newProf = new Professor();
         newProf.setName("Prof Johan");
         professorRepository.save(newProf);
 
 
-        pulledStudent.setProfesssor(newProf);
-        anotherNewStudent.setProfesssor(newProf);
+        pulledStudent.setProfessor(newProf);
+        anotherNewStudent.setProfessor(newProf);
         studentRepository.save(pulledStudent);
         studentRepository.save(anotherNewStudent);
 
         //
-        Professsor pulledProfessor = professorRepository.findById(newProf.getId())
+        Professor pulledProfessor = professorRepository.findById(newProf.getId())
                 .orElseThrow(() -> {
                     throw new IllegalArgumentException("Error");
                 });
@@ -79,6 +79,13 @@ public class PostGradManagerRunner implements CommandLineRunner {
 //        } catch (IllegalArgumentException e) {
 //            System.out.println("not found");
 //        }
-        System.out.println(pulledProfessor.getStudents().toString());
+        //System.out.println(pulledProfessor.getStudents().toString()); // lazy loading doesn't work outside a transaction
+
+        var noprof = studentRepository.findByProfessorIsNull();
+        var gotprof = studentRepository.findByProfessorIsNotNull();
+        System.out.println("-------------------DONE---------------------");
+
     }
+
+
 }
