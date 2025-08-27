@@ -18,8 +18,9 @@ public class Student {
     // this student model will reference a professor
     // the student is the owner of this relationships
 
-    @ManyToOne
-    private Professsor professsor;
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "professor_id")
+    private Professor professor;
 
 
 
